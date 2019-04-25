@@ -2,7 +2,7 @@
 
 require_once("config.php");
 
-if($_SERVER["REQUEST_METHOD"] == "POST"){
+if(isset($_POST['register'])){
 
     // фильтр входных данных
     $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
@@ -14,15 +14,17 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 
     // подготовка запроса
-	$sql = "INSERT INTO users (username, email, password, description) 
+	$sql = "INSERT INTO users (username, email, password, description, photo, url_img) 
             VALUES (:username, :email, :password, :description)";
+
 	$stmt = $db->prepare($sql);
 
     // параметры запроса
     $params = array(
 	    ":username" => $username,
-	    ":password" => $password,
 	    ":email" => $email,
+	    ":password" => $password,
+	    ":photo" => $password,
 	    ":description" => $description,
     );
 

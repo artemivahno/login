@@ -1,11 +1,9 @@
--- Table structure for table `users`
-
 -- phpMyAdmin SQL Dump
 -- version 4.7.7
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Апр 25 2019 г., 05:57
+-- Время создания: Апр 25 2019 г., 15:53
 -- Версия сервера: 5.7.20-log
 -- Версия PHP: 7.2.0
 
@@ -35,9 +33,9 @@ CREATE TABLE `users` (
   `username` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `name` varchar(255) NOT NULL,
   `photo` varchar(255) NOT NULL DEFAULT 'default.svg',
-  `description` text
+  `description` text,
+  `url_img` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -56,5 +54,3 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
-
