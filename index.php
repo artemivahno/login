@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Pesbuk</title>
+	<title>Регистрация</title>
 
      <link rel="stylesheet" href="css/bootstrap.min.css" />
 </head>
@@ -16,6 +16,14 @@
                     <div class="col-md-8">
                         <h1>Добро пожаловать в форму регистрации</h1>
                         <p>Присоединяйтесь</p>
+	                    <?php
+	                    if(!empty($_SESSION['auth'])) {
+
+	                    }
+	                    else {
+		                    echo "Пожалуйста, авторизуйтесь";
+	                    }
+	                    ?>
                     </div>
                     <div class="col-md-4">
                         <a href="login.php" class="btn btn-secondary">Войти в систему</a>
@@ -45,10 +53,3 @@
  * Date: 022 22.04.19
  * Time: 21:39
  */
-if(!empty($_SESSION['auth'])){
-
-} else{
-	echo "пожалуйста, авторизуйтесь";
-
-}
-
