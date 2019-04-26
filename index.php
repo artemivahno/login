@@ -1,55 +1,54 @@
+<?php
+session_start();
+$sessData = !empty($_SESSION['sessData'])?$_SESSION['sessData']:'';
+if(!empty($sessData['status']['msg'])){
+    $statusMsg = $sessData['status']['msg'];
+    $statusMsgType = $sessData['status']['type'];
+    unset($_SESSION['sessData']['status']);
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Регистрация</title>
+    <title>Registration</title>
 
-     <link rel="stylesheet" href="css/bootstrap.min.css" />
+<link rel="stylesheet" href="style.css" />
 </head>
-<body class="bg-light">
-    <header>
-        <div class="jumbotron jumbotron-fluid">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-8">
-                        <h1>Добро пожаловать в форму регистрации</h1>
-                        <p>Присоединяйтесь</p>
-	                    <?php
-	                    if(!empty($_SESSION['auth'])) {
 
-	                    }
-	                    else {
-		                    echo "Пожалуйста, авторизуйтесь";
-	                    }
-	                    ?>
-                    </div>
-                    <div class="col-md-4">
-                        <a href="login.php" class="btn btn-secondary">Войти в систему</a>
-                        <a href="register.php" class="btn btn-success">Зарегистрироваться</a>
-                    </div>
-                </div>
+
+<div class="container">
+    <?php
+        if(!empty($sessData['userLoggedIn']) && !empty($sessData['userID'])){
+            include 'user.php';
+            $user = new User();
+            $conditions['where'] = array(
+                'id' => $sessData['userID'],
+            );
+            $conditions['return_type'] = 'single';
+            $userData = $user->getRows($conditions);
+    ?>
+    <h2>Welcome <?php echo $userData['first_name']; ?>!</h2>
+    <a href="userAccount.php?logoutSubmit=1" class="logout">Logout</a>
+    <div class="regisFrm">
+        <p><b>Name: </b><?php echo $userData['first_name'].' '.$userData['last_name']; ?></p>
+        <p><b>Email: </b><?php echo $userData['email']; ?></p>
+        <p><b>Phone: </b><?php echo $userData['phone']; ?></p>
+    </div>
+    <?php }else{ ?>
+    <h2>Login to Your Account</h2>
+    <?php echo !empty($statusMsg)?'<p class="'.$statusMsgType.'">'.$statusMsg.'</p>':''; ?>
+    <div class="regisFrm">
+        <form action="userAccount.php" method="post">
+            <input type="email" name="email" placeholder="EMAIL" required="">
+            <input type="password" name="password" placeholder="PASSWORD" required="">
+            <div class="send-button">
+                <input type="submit" name="loginSubmit" value="LOGIN">
             </div>
-        </div>
-    </header>
-
-    <section>
-        <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <img class="img img-responsive" src="img/connect.png" />
-                    </div>
-                </div>
-            </div>
-    </section>
-
-</body>
-</html>
-<?php
-/**
- * Created by PhpStorm.
- * User: User
- * Date: 022 22.04.19
- * Time: 21:39
- */
+        </form>
+        <p>Don't have an account? <a href="registration.php">Register</a></p>
+    </div>
+    <?php } ?>
+</div>
