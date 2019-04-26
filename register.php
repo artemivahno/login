@@ -16,7 +16,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     // подготовка запроса
 	$sql = "INSERT INTO users (username, email, password, description) 
             VALUES (:username, :email, :password, :description)";
-	$stmt = $db->prepare($sql);
+	$stmt = $pdo->prepare($sql);
 
     // параметры запроса
     $params = array(

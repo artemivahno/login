@@ -13,7 +13,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
     $sql = "SELECT * FROM users WHERE username=:username OR email=:email";
 
-    $statement = $db->prepare($sql);
+    $statement = $pdo->prepare($sql);
 
     // запрос параметров
     $params = array(
